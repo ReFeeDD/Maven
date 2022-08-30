@@ -1,49 +1,45 @@
 package Pikabu;
 
+import org.example.MainPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-
-
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 public class PikabuTest extends AbstractTest {
 
-    @Test
-        void Autorizatetest() throws InterruptedException {
-        getDriver().findElement(By.xpath(".//form[@id = 'signin-form']/div[1]/div/div/input")).click();
-        getDriver().findElement(By.xpath(".//form[@id = 'signin-form']/div[1]/div/div/input")).sendKeys("AutoTester");
-        getDriver().findElement(By.xpath(".//form[@id = 'signin-form']/div[2]/div/div/input")).sendKeys("Qwertyu8");
-        getDriver().findElement(By.xpath("//*[@id='signin-form']/div[7]/button")).click();
 
-        assertTrue(getDriver().findElement(By.xpath(".//div[@class = 'user__info-item']/a")).getText().equals("AutoTester"));
+
+    @Test
+    public void AutorizateTest() throws InterruptedException {
+
+        new MainPage(getWebDriver()).Autorizated("AutoTester","Qwertyu8");
+        assertTrue(getWebDriver().findElement(By.xpath(".//div[@class = 'user__info-item']/a")).getText().equals("AutoTester"));
 
     }
 
     @Test
-    void SerfingTest() {
-        getDriver().findElement(By.xpath(".//div[@data-feed-key = 'new']/a")).click();
-        assertTrue(getDriver().findElement(By.cssSelector("[class*='header-menu__item_current']")).getText().equals("Свежее"));
+        void ClickToNewTest() {
+        // Старое
+        //  getDriver().findElement(By.xpath(".//div[@data-feed-key = 'new']/a")).click();
 
-        getDriver().findElement(By.xpath(".//div[@data-feed-key = 'best']/a")).click();
-        assertTrue(getDriver().findElement(By.cssSelector("[class*='header-menu__item_current']")).getText().equals("Лучшее"));
+        // новое
+        new MainPage(getWebDriver()).setNavigateToNew();
+        assertTrue(getWebDriver().findElement(By.cssSelector("[class*='header-menu__item_current']")).getText().equals("Свежее"));
     }
     @Test
-    void NewPostTest() {
-        getDriver().findElement(By.xpath(".//a[@class='button button_success button_add button_width_100']")).click();
-        getDriver().findElement(By.xpath(".//div[@class='input input_section input_title input_editor']/span/div")).sendKeys("123");
-        getDriver().findElement(By.xpath(".//div[@class='story-editor-block__content']")).sendKeys("123");
-
-        assertTrue(getDriver().findElement(By.cssSelector(".//div[@class='input input_section input_title input_editor']/span/div")).getText().equals("123"));
-        assertTrue(getDriver().findElement(By.cssSelector(".//div[@class='story-editor-block__content']")).getText().equals("123"));
-
+        void ClickToBestTest() {
+        new MainPage(getWebDriver()).navigateToBest();
+        assertTrue(getWebDriver().findElement(By.cssSelector("[class*='header-menu__item_current']")).getText().equals("Лучшее"));
     }
+
 
     @Test
     void notificationTest(){
-        getDriver().findElement(By.xpath(".//div[@class='header__item header__right-menu']/div/a[1]")).click();
-        Assertions.assertDoesNotThrow( ()-> getDriver().navigate().to("https://study.pikabu.ru/course/smm_specialist_vkontakte/?utm_source=site&utm_medium=topbar&utm_campaign=main&utm_content=smmstart&utm_term=desktop"),
+       new MainPage(getWebDriver()).notification();
+        Assertions.assertDoesNotThrow( ()-> getWebDriver().navigate().to("https://study.pikabu.ru/course/smm_specialist_vkontakte/?utm_source=site&utm_medium=topbar&utm_campaign=main&utm_content=smmstart&utm_term=desktop"),
                 "Страница не доступна");
 
     }
@@ -51,11 +47,12 @@ public class PikabuTest extends AbstractTest {
     @Test
     void TelegramTest () {
 
-        getDriver().findElement(By.xpath(".//div[@class='sidebar-block sidebar-block_border messengers-widget']/div[2]/ul/li[1]/div[4]/a")).click();
+        new MainPage(getWebDriver()).TelegrammClick();
 
-        Assertions.assertDoesNotThrow( ()-> getDriver().navigate().to("https://t.me/pikabu"),
+        Assertions.assertDoesNotThrow( ()-> getWebDriver().navigate().to("https://t.me/pikabu"),
                 "Страница не доступна");
 
 
     }
-}
+
+    }

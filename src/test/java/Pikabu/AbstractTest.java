@@ -1,6 +1,13 @@
 package Pikabu;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import java.time.Duration;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,52 +17,42 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
+
 public abstract class AbstractTest {
 
-    private static WebDriver driver;
+    static WebDriver webDriver;
 
     @BeforeAll
-    static void init(){
+    static void setDriver(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--incognito");
+        options.addArguments("--incognito");
         //options.addArguments("--headless");
         options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        options.setPageLoadTimeout(Duration.ofSeconds(10));
+
+
+        webDriver = new ChromeDriver(options);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     @BeforeEach
-
-    void goTo(){
-        Assertions.assertDoesNotThrow( ()-> driver.navigate().to("https://www.pikabu.ru"),
+    void initMainPage(){
+        Assertions.assertDoesNotThrow( ()-> getWebDriver().navigate().to("https://www.pikabu.ru/"),
                 "Страница не доступна");
+        Assertions.assertTrue(true);
 
-
-        //Авторизация
-      /*   WebElement webElement1 = driver.findElement(By.xpath(".//form[@id = 'signin-form']/div[1]/div/div/input"));
-      webElement1.click();
-       webElement1.sendKeys("AutoTester");
-
-        WebElement webElement2 = driver.findElement(By.xpath(".//form[@id = 'signin-form']/div[2]/div/div/input"));
-        webElement2.click();
-        webElement2.sendKeys("Qwertyu8");
-
-        WebElement webElement3 = driver.findElement(By.xpath("//*[@id=\"signin-form\"]/div[7]/button"));
-        webElement3.click();
-
-       */
     }
-
-
 
     @AfterAll
-    static void close(){
-        driver.quit();
+    public static void exit(){
+
+        if(webDriver !=null) webDriver.quit();
     }
 
-    public static WebDriver getDriver() {
-        return driver;
+    public WebDriver getWebDriver(){
+        return this.webDriver;
     }
 }
+
 

@@ -1,5 +1,6 @@
 package Pikabu;
 
+import io.qameta.allure.Step;
 import org.example.MainPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,12 +13,16 @@ public class PikabuTest extends AbstractTest {
 
 
 
-    @Test
-    public void AutorizateTest() throws InterruptedException {
+    @Step
+    public void AutorizateTest(String Login, String Password) throws InterruptedException {
 
-        new MainPage(getWebDriver()).Autorizated("AutoTester","Qwertyu8");
+        new MainPage(getWebDriver()).Autorizated(Login,Password);
         assertTrue(getWebDriver().findElement(By.xpath(".//div[@class = 'user__info-item']/a")).getText().equals("AutoTester"));
 
+    }
+    @Test
+    public void AutorizatedTest() throws InterruptedException {
+        AutorizateTest("AutoTester","Qwertyu8");
     }
 
     @Test

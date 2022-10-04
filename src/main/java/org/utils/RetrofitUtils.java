@@ -1,10 +1,10 @@
-package org.Lesson5.utils;
+package org.utils;
 
 
 
 import lombok.experimental.UtilityClass;
-import org.Lesson5.api.CategoryService;
-import org.Lesson5.api.ProductService;
+import org.api.CategoryService;
+import org.api.ProductService;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 

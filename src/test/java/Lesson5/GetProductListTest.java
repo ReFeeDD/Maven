@@ -2,14 +2,13 @@ package Lesson5;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.Lesson5.dto.ProductDto;
+import org.dto.ProductDto;
 import retrofit2.Response;
 
 import java.util.List;
 
-import static org.Lesson5.utils.RetrofitUtils.getProductService;
+import static org.utils.RetrofitUtils.getProductService;
 
 public class GetProductListTest {
     @SneakyThrows

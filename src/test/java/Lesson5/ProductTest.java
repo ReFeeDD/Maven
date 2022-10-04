@@ -5,15 +5,13 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.Lesson5.dto.ProductDto;
+import org.dto.ProductDto;
 import retrofit2.Response;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Objects;
 
-import static org.Lesson5.utils.RetrofitUtils.getCategoryService;
-import static org.Lesson5.utils.RetrofitUtils.getProductService;
+import static org.utils.RetrofitUtils.getCategoryService;
+import static org.utils.RetrofitUtils.getProductService;
 
 public class ProductTest {
     ProductDto productDto, newProductDto;

@@ -1,4 +1,4 @@
-package org.Lesson5.dto;
+package org.dto;
 
 
 import lombok.*;

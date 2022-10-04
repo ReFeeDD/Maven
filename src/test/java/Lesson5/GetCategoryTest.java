@@ -4,10 +4,10 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.Lesson5.dto.CategoryResponseDto;
+import org.dto.CategoryResponseDto;
 import retrofit2.Response;
 
-import static org.Lesson5.utils.RetrofitUtils.getCategoryService;
+import static org.utils.RetrofitUtils.getCategoryService;
 
 public class GetCategoryTest {
 

@@ -1,7 +1,7 @@
-package org.Lesson5.api;
+package org.api;
 
 
-import org.Lesson5.dto.CategoryResponseDto;
+import org.dto.CategoryResponseDto;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
